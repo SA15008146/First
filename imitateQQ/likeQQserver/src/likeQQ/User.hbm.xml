@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping
+  PUBLIC "-//Hibernate?Hibernate Mapping DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="likeQQ">
+
+  <class name="User" table="User" dynamic-update="true">
+    <id name="ID">
+    <generator class="native"></generator></id>
+  <property name="userName"></property>
+  <property name="nickname"></property>
+  <property name="password"></property>
+  <property name="statement"></property>
+  <property name="email"></property>
+  <!-- <property name="TempMsg"></property> -->
+  <set name= "TempMsg" cascade="all" inverse="true">
+  		<key column="accepter"></key>
+  		<one-to-many class="Message"></one-to-many>
+  </set>
+  
+  <set name="friends">
+  	<key column="id"/>
+  	<element column="friendID" type ="long"></element>
+  </set>
+  <property name="IP"></property>
+  </class>
+</hibernate-mapping>

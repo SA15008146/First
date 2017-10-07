@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping
+  PUBLIC "-//Hibernate?Hibernate Mapping DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="likeQQ">
+
+  <class name="Message" table="Message" dynamic-update="true">
+    <id name="ID">
+		<generator class="native"/></id>
+	  <many-to-one name="senter" class="User"></many-to-one>
+	  <property name="msg"></property>
+	  <property name="time"></property>
+	  <many-to-one name="accepter" column="accepter"></many-to-one>
+  </class>
+
+</hibernate-mapping>

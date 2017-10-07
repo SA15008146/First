@@ -1,0 +1,35 @@
+
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+	
+<!-- hibernate本质上的作用是建立一个面向对象程序与面向关系程序之间的桥梁，所以他要设置两个配置文件
+	  一个是用来建立hibernate与数据库之间的关系，另一个是建立hibernate与数据之间的关系；该文件即是
+	  用来创建hibernate与数据库之间的关系 -->
+<hibernate-configuration>
+<!-- <session-factory name="foo"> 刚开始的时候对session-factory进行设置的时候默认
+	  添加了name属性，导致系统会试图将一个SessionFactory实例以foo为名bind到jndi上，而有的
+	 application container不支持jndi绑定。把这个变量去掉即可。 -->
+	<session-factory>
+		<!-- 从hibernate4 开始下面这一行即使不加也是可以的 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- 设置连接的地址jdbc:mysql://192.168.10.222:3306/mydb 中间部分是指定网络上具体的某
+		一台电脑，以及某一个端口，即某一个程序对应的位置；-->
+		<property name="hibernate.connection.url">jdbc:mysql:///mydb</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">123456</property>
+		<!-- 不同数据库的特征性设置,保证尽可能的搞笑操作数据库 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<!-- 数据库的自动建表操作：
+				create-drop 	一般作为测试时使用，在程序启动时会自动建立数据库，当关闭时则自动删除
+				create			启动时先删除上次创建的表，再创建新的表；
+				update			程序启动时，如果没有表就创建表，有则检查更新；(推荐使用)
+				validate 		程序启动时检查表结构，不会创建	-->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- 显示执行语句，可以不设置， 开发阶段一般显示-->
+		<property name="show_sql">true</property>
+		<!-- 申明需要管理的类 -->
+		<mapping resource="likeQQ\User.hbm.xml"/>
+		<mapping resource="likeQQ\Message.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>
